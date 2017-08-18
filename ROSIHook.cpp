@@ -204,7 +204,7 @@ void ROSIHook::doROSI()
             }
             Eigen::VectorXd g0 = 2.0*Vflat.transpose()*Minv*NV;
             Eigen::MatrixXd CE(violated.size(), 0);
-            Eigen::VectorXd ce0(0);
+            Eigen::VectorXd ce0(0l);
             Eigen::MatrixXd CI(violated.size(), violated.size());
             CI.setIdentity();
             Eigen::VectorXd ci0(violated.size());
