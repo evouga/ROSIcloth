@@ -3,7 +3,15 @@
 
 #include <mutex>
 #include <thread>
+
+// shut up libigl warnings
+#ifdef _MSC_VER
+#pragma warning(push, 0)   
+#endif
 #include <igl/viewer/Viewer.h>
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 class PhysicsHook
 {
