@@ -250,13 +250,29 @@ bool ROSIHook::simulateOneStep()
         V(i, 2) += dt * g;
     }
 
-    if (Q(0, 2) < 0 && !bounced)
+    if(!bounced)
     {
-        bounced = true;
-        if (contactMethod == CM_GS)
-            doGaussSeidel();
-        else if(contactMethod == CM_ROSI)
-            doROSI();
+        bool dobounce = true;
+        for(int i=0; i<Q.rows(); i++)
+            if(Q(i,2) >= 0)
+                dobounce = false;
+        if(dobounce)
+    	{
+	    bounced = true;
+	    if (contactMethod == CM_GS)
+            	doGaussSeidel();
+	    else if(contactMethod == CM_ROSI)
+            	doROSI();
+    	}
+    }
+    else
+    {
+        bool undobounce = true;
+        for(int i=0; i<Q.rows(); i++)
+            if(Q(i,2) < 0)
+                undobounce = false;
+        if(undobounce)
+            bounced = false;
     }
 
     return false;
